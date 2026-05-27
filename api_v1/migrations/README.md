@@ -152,3 +152,44 @@ curl -X DELETE "http://127.0.0.1:8000/api/v1/books/?ids=1,2,3"
 
 Удалить несколько авторов:
 curl -X DELETE "http://127.0.0.1:8000/api/v1/authors/?ids=1,2,3"
+
+
+Авторы
+Действие	Ссылка
+Список всех авторов	http://127.0.0.1:8000/admin/api_v1/author/
+Добавить автора	http://127.0.0.1:8000/admin/api_v1/author/add/
+Изменить автора (ID=1)	http://127.0.0.1:8000/admin/api_v1/author/1/change/
+Удалить автора (ID=1)	http://127.0.0.1:8000/admin/api_v1/author/1/delete/
+Жанры
+Действие	Ссылка
+Список всех жанров	http://127.0.0.1:8000/admin/api_v1/genre/
+Добавить жанр	http://127.0.0.1:8000/admin/api_v1/genre/add/
+Изменить жанр (ID=1)	http://127.0.0.1:8000/admin/api_v1/genre/1/change/
+Удалить жанр (ID=1)	http://127.0.0.1:8000/admin/api_v1/genre/1/delete/
+Книги
+Действие	Ссылка
+Список всех книг	http://127.0.0.1:8000/admin/api_v1/book/
+Добавить книгу	http://127.0.0.1:8000/admin/api_v1/book/add/
+Изменить книгу (ID=1)	http://127.0.0.1:8000/admin/api_v1/book/1/change/
+Удалить книгу (ID=1)	http://127.0.0.1:8000/admin/api_v1/book/1/delete/
+Комментарии
+Действие	Ссылка
+Список всех комментариев	http://127.0.0.1:8000/admin/api_v1/comment/
+Добавить комментарий	http://127.0.0.1:8000/admin/api_v1/comment/add/
+Изменить комментарий (ID=1)	http://127.0.0.1:8000/admin/api_v1/comment/1/change/
+Удалить комментарий (ID=1)	http://127.0.0.1:8000/admin/api_v1/comment/1/delete/
+API эндпоинты (JSON ответы)
+Если хотите смотреть данные в формате JSON через браузер:
+
+Данные	Ссылка
+Список авторов	http://127.0.0.1:8000/api/v1/authors/
+Автор с ID=1	http://127.0.0.1:8000/api/v1/authors/1/
+Список жанров	http://127.0.0.1:8000/api/v1/genres/
+Жанр с ID=1	http://127.0.0.1:8000/api/v1/genres/1/
+Список книг	http://127.0.0.1:8000/api/v1/books/
+Книга с ID=1	http://127.0.0.1:8000/api/v1/books/1/
+Список комментариев	http://127.0.0.1:8000/api/v1/comments/
+Комментарий с ID=1	http://127.0.0.1:8000/api/v1/comments/1/
+Комментарии к книге ID=1	http://127.0.0.1:8000/api/v1/comments/?book_id=1
+Книги автора ID=1	http://127.0.0.1:8000/api/v1/books/?author_id=1
+Книги жанра ID=1	http://127.0.0.1:8000/api/v1/books/?genre_id=1

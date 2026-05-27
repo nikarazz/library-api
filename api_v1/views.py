@@ -1,11 +1,14 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
 from .models import Author, Genre, Book, Comment
 from .serializers import AuthorSerializer, GenreSerializer, BookSerializer, CommentSerializer
+from rest_framework import permissions
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
 
@@ -55,8 +58,19 @@ class AuthorViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return super().destroy(request, *args, **kwargs)
 
+    @action(detail=False, methods=['delete'])
+    def delete_all(self, request):
+        """Удаляет всех авторов"""
+        count = Author.objects.all().count()
+        Author.objects.all().delete()
+        return Response(
+            {'message': f'Удалено {count} авторов'},
+            status=status.HTTP_204_NO_CONTENT
+        )
+
 
 class GenreViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = GenreSerializer
     queryset = Genre.objects.all()
 
@@ -106,8 +120,19 @@ class GenreViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return super().destroy(request, *args, **kwargs)
 
+    @action(detail=False, methods=['delete'])
+    def delete_all(self, request):
+        """Удаляет все жанры"""
+        count = Genre.objects.all().count()
+        Genre.objects.all().delete()
+        return Response(
+            {'message': f'Удалено {count} жанров'},
+            status=status.HTTP_204_NO_CONTENT
+        )
+
 
 class BookViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.AllowAny]
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 
@@ -163,8 +188,19 @@ class BookViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return super().destroy(request, *args, **kwargs)
 
+    @action(detail=False, methods=['delete'])
+    def delete_all(self, request):
+        """Удаляет все книги"""
+        count = Book.objects.all().count()
+        Book.objects.all().delete()
+        return Response(
+            {'message': f'Удалено {count} книг'},
+            status=status.HTTP_204_NO_CONTENT
+        )
+
 
 class CommentViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated] 
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
 
@@ -217,3 +253,13 @@ class CommentViewSet(viewsets.ModelViewSet):
             Comment.objects.filter(pk__in=ids_list).delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return super().destroy(request, *args, **kwargs)
+
+    @action(detail=False, methods=['delete'])
+    def delete_all(self, request):
+        """Удаляет все комментарии"""
+        count = Comment.objects.all().count()
+        Comment.objects.all().delete()
+        return Response(
+            {'message': f'Удалено {count} комментариев'},
+            status=status.HTTP_204_NO_CONTENT
+        )
